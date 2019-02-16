@@ -32,7 +32,7 @@ $(function() {
         it('URLs are defined', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
-                expect(feed.url).not.toBe({});
+                expect(feed.url).not.toBe("");
             });
         });
 
@@ -44,7 +44,7 @@ $(function() {
          it('Names are defined', function(){
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
-                expect(feed.name).not.toBe({});
+                expect(feed.name).not.toBe("");
             });
          });
     });
@@ -58,8 +58,7 @@ $(function() {
          */
 
         it('Menu is hidden', function() {
-            var el = document.querySelector("body");
-            expect(el.className).toBe('menu-hidden');   
+            expect($("body").hasClass("menu-hidden")).toBe(true);   
             
         });
 
@@ -70,12 +69,11 @@ $(function() {
           */
 
         it('Menu class is toggled', function(){
-            var el = document.querySelector("body");
             menuIcon = $('.menu-icon-link');
             menuIcon.trigger( "click" );
-            expect(el.className).not.toBe('menu-hidden');   
+            expect($("body").hasClass("menu-hidden")).toBe(false);   
             menuIcon.trigger( "click" );
-            expect(el.className).toBe('menu-hidden');
+            expect($("body").hasClass("menu-hidden")).toBe(true);
         });
     });
 
@@ -90,14 +88,11 @@ $(function() {
          */
 
         beforeEach(function(done) {
-            loadFeed(0,function() {
-                done();
-            });
+            loadFeed(0, done);
         });
 
         it("At least one .entry element", function(done){
-            let entries = document.querySelectorAll(".entry")
-            expect(entries.length).not.toBe(0);
+            expect($(".feed .entry").length).not.toBe(0);
             done();
         })
        
@@ -112,9 +107,7 @@ $(function() {
          * loadFeed() is asynchronous.
          */
          beforeEach(function(done) {
-            loadFeed(0,function() {
-                done();
-            });
+            loadFeed(0, done);
         });
 
         it("Content changes when new feed comes", function(done){
